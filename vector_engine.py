@@ -22,12 +22,17 @@ class VectorEngine:
 
     @staticmethod  # Manhattan distance L1 norm
     def d(a, b):
-        distance = abs(a - b)
+        distance = 0
+        for coordinate1,coordinate2 in zip(a, b):
+            distance += abs(coordinate1 - coordinate2)
         return distance
     
     @staticmethod  # Cosine similarity
     def cosine_sim(a: list[float], b: list[float]):
         if len(a) != len(b):
             raise ValueError("Vectors must be of same length")
-        similarity = (VectorEngine.scalar_product(a, b)) / (VectorEngine.euclidean_norm(a) * VectorEngine.euclidean_norm(b))
+        if VectorEngine.euclidean_norm(a) == 0.0 or VectorEngine.euclidean_norm(b) == 0.0:
+            return 0.0
+        else:
+            similarity = (VectorEngine.scalar_product(a, b)) / (VectorEngine.euclidean_norm(a) * VectorEngine.euclidean_norm(b))
         return similarity
