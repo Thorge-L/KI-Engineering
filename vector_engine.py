@@ -5,9 +5,7 @@ import math
 class VectorEngine:
     @staticmethod
     def _check_dimensions(v1, v2):
-    if len(v1) != len(v2):
-            raise ValueError("Vectors must be of the same length")
-
+        if len(v1) != len(v2):
 
 
     @staticmethod  # scalar product
@@ -28,6 +26,7 @@ class VectorEngine:
     @staticmethod  # Manhattan distance L1 norm
     def d(v1, v2):
         VectorEngine._check_dimensions(v1, v2)
+        
         distance = 0
         for coordinate1,coordinate2 in zip(v1, v2):
             distance += abs(coordinate1 - coordinate2)
@@ -40,8 +39,8 @@ class VectorEngine:
         norm_v1 = VectorEngine.euclidean_norm(v1)
         norm_v2 = VectorEngine.euclidean_norm(v2)
 
-        if norm_v1 or norm_v2 < 1e-10:
+        if norm_v1 < 1e-10 or norm_v2 < 1e-10:
             return 0.0
         
-        similarity = (VectorEngine.scalar_product(v1, v2)) / (VectorEngine.euclidean_norm(v1) * VectorEngine.euclidean_norm(v2))
+        similarity = (VectorEngine.scalar_product(v1, v2)) / (norm_v1 * norm_v2)
         return similarity
