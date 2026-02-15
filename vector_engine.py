@@ -6,7 +6,7 @@ class VectorEngine:
     @staticmethod
     def _check_dimensions(v1, v2):
         if len(v1) != len(v2):
-
+            raise ValueError("Vectors must be of the same length")
 
     @staticmethod  # scalar product
     def scalar_product(v1, v2):
@@ -26,7 +26,7 @@ class VectorEngine:
     @staticmethod  # Manhattan distance L1 norm
     def d(v1, v2):
         VectorEngine._check_dimensions(v1, v2)
-        
+
         distance = 0
         for coordinate1,coordinate2 in zip(v1, v2):
             distance += abs(coordinate1 - coordinate2)
